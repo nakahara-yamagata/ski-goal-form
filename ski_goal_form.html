@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>山形大学スキー部｜目標管理シート 2026/27</title>
+  <meta name="description" content="山形大学スキー部 目標管理シート 2026/27シーズン" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green: #1D9E75;
+      --green-dark: #0F6E56;
+      --green-light: #E1F5EE;
+      --green-text: #0F6E56;
+      --bg: #ffffff;
+      --bg-sub: #f5f5f3;
+      --text: #1a1a1a;
+      --text-sub: #6b6b6b;
+      --text-hint: #aaaaaa;
+      --border: rgba(0,0,0,0.12);
+      --border-em: rgba(0,0,0,0.22);
+      --radius: 10px;
+      --radius-lg: 14px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1a1a1a;
+        --bg-sub: #252525;
+        --text: #f0f0f0;
+        --text-sub: #aaaaaa;
+        --text-hint: #666666;
+        --border: rgba(255,255,255,0.12);
+        --border-em: rgba(255,255,255,0.22);
+        --green-light: #0d3d2c;
+        --green-text: #4ecf9e;
+      }
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Noto Sans JP', sans-serif;
+      background: var(--bg-sub);
+      color: var(--text);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page {
+      max-width: 560px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem 6rem;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      padding: 1.25rem 0 1.5rem;
+      border-bottom: 0.5px solid var(--border);
+      margin-bottom: 1.5rem;
+    }
+    .header-badge {
+      display: inline-block;
+      background: var(--green-light);
+      color: var(--green-text);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      padding: 3px 10px;
+      border-radius: 12px;
+      margin-bottom: 8px;
+    }
+    .header h1 {
+      font-size: 19px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.3;
+    }
+    .header p {
+      font-size: 12px;
+      color: var(--text-sub);
+      margin-top: 4px;
+    }
+
+    /* Progress */
+    .progress-wrap { margin-bottom: 1.5rem; }
+    .progress-bar {
+      height: 4px;
+      background: var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: var(--green);
+      border-radius: 2px;
+      transition: width 0.4s ease;
+    }
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--text-hint);
+      margin-top: 6px;
+    }
+
+    /* Steps */
+    .step { display: none; }
+    .step.active { display: block; }
+    .step-label {
+      font-size: 11px;
+      color: var(--text-hint);
+      letter-spacing: 0.06em;
+      margin-bottom: 4px;
+    }
+    .step-title {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 6px;
+      line-height: 1.4;
+    }
+
+    /* Hint box */
+    .hint-box {
+      background: var(--green-light);
+      border-radius: var(--radius);
+      padding: 0.65rem 0.9rem;
+      margin-bottom: 1rem;
+    }
+    .hint-box p {
+      font-size: 12px;
+      color: var(--green-text);
+      line-height: 1.7;
+    }
+    .hint-box strong { font-weight: 600; }
+
+    /* Form elements */
+    label.field-label {
+      display: block;
+      font-size: 13px;
+      color: var(--text-sub);
+      margin-bottom: 6px;
+    }
+    textarea, input[type="text"], select {
+      width: 100%;
+      padding: 11px 13px;
+      font-size: 16px; /* 16px prevents iOS zoom */
+      font-family: inherit;
+      border: 1px solid var(--border-em);
+      border-radius: var(--radius);
+      background: var(--bg);
+      color: var(--text);
+      -webkit-appearance: none;
+      appearance: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
+    textarea:focus, input[type="text"]:focus, select:focus {
+      outline: none;
+      border-color: var(--green);
+      box-shadow: 0 0 0 3px rgba(29,158,117,0.15);
+    }
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 13px center;
+      padding-right: 36px;
+    }
+
+    /* Row grid */
+    .form-row2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    @media (max-width: 380px) {
+      .form-row2 { grid-template-columns: 1fr; }
+    }
+
+    /* Chips */
+    .chip-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 0.75rem;
+    }
+    .chip {
+      padding: 10px 18px;
+      border-radius: 24px;
+      border: 1px solid var(--border-em);
+      font-size: 14px;
+      font-family: inherit;
+      cursor: pointer;
+      background: var(--bg);
+      color: var(--text);
+      transition: all 0.15s;
+      -webkit-tap-highlight-color: transparent;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+    }
+    .chip.selected {
+      background: var(--green-light);
+      border-color: var(--green);
+      color: var(--green-text);
+      font-weight: 600;
+    }
+
+    /* Month inputs */
+    .month-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+    .month-tag {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-sub);
+      min-width: 38px;
+    }
+    .month-row input[type="text"] {
+      flex: 1;
+      padding: 9px 12px;
+      font-size: 15px;
+    }
+
+    /* Fixed nav */
+    .nav {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      background: var(--bg);
+      border-top: 0.5px solid var(--border);
+      padding: 0.75rem 1rem;
+      display: flex;
+      gap: 10px;
+      z-index: 100;
+    }
+    .btn {
+      padding: 12px 20px;
+      border-radius: var(--radius);
+      font-size: 15px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      min-height: 48px;
+      transition: all 0.15s;
+      -webkit-tap-highlight-color: transparent;
+      border: none;
+    }
+    .btn-back {
+      background: var(--bg-sub);
+      color: var(--text-sub);
+      flex: 0 0 auto;
+      border: 1px solid var(--border);
+    }
+    .btn-back:active { opacity: 0.7; }
+    .btn-next {
+      background: var(--green);
+      color: white;
+      flex: 1;
+    }
+    .btn-next:active { background: var(--green-dark); transform: scale(0.98); }
+
+    /* Result sheet */
+    .sheet-wrap {
+      background: var(--bg);
+      border: 1px solid var(--border-em);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-bottom: 1rem;
+    }
+    .sheet-header {
+      background: var(--green);
+      color: white;
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+    .sheet-header-title { font-size: 13px; font-weight: 600; }
+    .sheet-header-date { font-size: 11px; opacity: 0.85; }
+    .sheet-body { padding: 1rem; display: flex; flex-direction: column; gap: 10px; }
+    .sheet-row2 {
+      display: grid;
+      grid-template-columns: minmax(0,1fr) minmax(0,1fr);
+      gap: 10px;
+    }
+    @media (max-width: 380px) {
+      .sheet-row2 { grid-template-columns: 1fr; }
+    }
+    .sf {
+      padding: 10px 12px;
+      background: var(--bg-sub);
+      border-radius: var(--radius);
+    }
+    .sf-label {
+      font-size: 10px;
+      color: var(--text-hint);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 4px;
+    }
+    .sf-value {
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.7;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .month-list { font-size: 12px; line-height: 2; }
+
+    .complete-msg {
+      font-size: 13px;
+      color: var(--text-sub);
+      line-height: 1.7;
+      margin-bottom: 1.25rem;
+      background: var(--bg-sub);
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius);
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+  <div class="header">
+    <div class="header-badge">2026/27 シーズン</div>
+    <h1>山形大学スキー部<br>目標管理シート</h1>
+    <p>フォームに答えるだけでシートが完成します</p>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-bar"><div class="progress-fill" id="prog" style="width:9%"></div></div>
+    <div class="progress-label">
+      <span id="prog-step">Step 1 / 11</span>
+      <span id="prog-pct">9%</span>
+    </div>
+  </div>
+
+  <div id="steps">
+
+    <!-- Step 1 -->
+    <div class="step active" data-step="1">
+      <p class="step-label">基本情報</p>
+      <p class="step-title">氏名と学年を教えてください</p>
+      <div style="height:1rem;"></div>
+      <div class="form-row2">
+        <div>
+          <label class="field-label" for="f-name">氏名</label>
+          <input type="text" id="f-name" placeholder="山形 太郎" autocomplete="name" />
+        </div>
+        <div>
+          <label class="field-label" for="f-grade">学年</label>
+          <select id="f-grade">
+            <option value="">選択</option>
+            <option value="1年">1年</option>
+            <option value="2年">2年</option>
+            <option value="3年">3年</option>
+            <option value="4年">4年</option>
+            <option value="大学院">大学院</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="step" data-step="2">
+      <p class="step-label">経験レベル</p>
+      <p class="step-title">スキー歴・経験レベルは？</p>
+      <p style="font-size:13px;color:var(--text-sub);margin-top:4px;">一番近いものを選んでください。</p>
+      <div class="chip-group" id="level-chips">
+        <div class="chip" data-val="初心者（未経験 or 1年以内）">初心者</div>
+        <div class="chip" data-val="中級（経験あり・大会未出場）">中級</div>
+        <div class="chip" data-val="競技経験者（大会出場経験あり）">競技経験者</div>
+        <div class="chip" data-val="引退（競技を退いている）">引退</div>
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="step" data-step="3">
+      <p class="step-label">目標</p>
+      <p class="step-title">今シーズンの目標を教えてください</p>
+      <div class="hint-box"><p><strong>記入例：</strong>SAJポイント120を切る・インカレ個人種目に出場する・初めて大会に出る・転ばずに1本滑りきる</p></div>
+      <textarea id="f-goal" placeholder="今シーズンで達成したいことを書いてください"></textarea>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="step" data-step="4">
+      <p class="step-label">これまでの経験</p>
+      <p class="step-title">これまでの主な成績・経験は？</p>
+      <div class="hint-box"><p><strong>記入例：</strong>SAJポイント244・インカレ2部CL14位・高校時代に地区大会出場・スキー未経験</p></div>
+      <textarea id="f-record" placeholder="経験がない場合は「未経験」と書いてください"></textarea>
+    </div>
+
+    <!-- Step 5 -->
+    <div class="step" data-step="5">
+      <p class="step-label">強み</p>
+      <p class="step-title">自分の強みは何ですか？</p>
+      <div class="hint-box"><p><strong>記入例：</strong>持久力がある・粘り強い・練習を休まない・体幹が強い・スキー以外のことでもOK</p></div>
+      <textarea id="f-strength" placeholder="自分のいいところを書いてみましょう" style="min-height:80px;"></textarea>
+    </div>
+
+    <!-- Step 6 -->
+    <div class="step" data-step="6">
+      <p class="step-label">課題</p>
+      <p class="step-title">今の課題・克服したいことは？</p>
+      <div class="hint-box"><p><strong>記入例：</strong>体重が重い・左右差がある・スタート前に緊張しすぎる・そもそも滑り方がわからない</p></div>
+      <textarea id="f-issue" placeholder="正直に書いてみましょう"></textarea>
+    </div>
+
+    <!-- Step 7 -->
+    <div class="step" data-step="7">
+      <p class="step-label">オフシーズン計画</p>
+      <p class="step-title">オフシーズンのトレーニング計画</p>
+      <div class="hint-box"><p><strong>記入例：</strong>5月→3000mTT　6月→ハーフマラソン　　「未定」でもOKです</p></div>
+      <div id="month-inputs">
+        <div class="month-row"><span class="month-tag">4月</span><input type="text" data-month="4" placeholder="未定 / ランニング開始 など" /></div>
+        <div class="month-row"><span class="month-tag">5月</span><input type="text" data-month="5" placeholder="未定 / 3000mTT など" /></div>
+        <div class="month-row"><span class="month-tag">6月</span><input type="text" data-month="6" placeholder="未定 / ハーフマラソン など" /></div>
+        <div class="month-row"><span class="month-tag">7月</span><input type="text" data-month="7" placeholder="未定 / 合宿 など" /></div>
+        <div class="month-row"><span class="month-tag">8月</span><input type="text" data-month="8" placeholder="未定 / 高地練習 など" /></div>
+        <div class="month-row"><span class="month-tag">9月</span><input type="text" data-month="9" placeholder="未定 など" /></div>
+        <div class="month-row"><span class="month-tag">10月</span><input type="text" data-month="10" placeholder="未定 など" /></div>
+        <div class="month-row"><span class="month-tag">11月</span><input type="text" data-month="11" placeholder="未定 / スキー開始 など" /></div>
+      </div>
+    </div>
+
+    <!-- Step 8 -->
+    <div class="step" data-step="8">
+      <p class="step-label">大会</p>
+      <p class="step-title">出場したい・気になる大会は？</p>
+      <div class="hint-box"><p><strong>記入例：</strong>インカレ・全日本学生・志賀高原100km・神室トレイルラン・まだわからない</p></div>
+      <textarea id="f-race" placeholder="出場予定・興味のある大会を書いてください" style="min-height:80px;"></textarea>
+    </div>
+
+    <!-- Step 9 -->
+    <div class="step" data-step="9">
+      <p class="step-label">部活への期待</p>
+      <p class="step-title">部活に期待すること・目標にしている先輩は？</p>
+      <div class="hint-box"><p><strong>記入例：</strong>チームの雰囲気をよくしたい・○○先輩の滑りを目指したい・友達を増やしたい</p></div>
+      <textarea id="f-aspire" placeholder="部活への期待や憧れを自由に書いてください" style="min-height:80px;"></textarea>
+    </div>
+
+    <!-- Step 10 -->
+    <div class="step" data-step="10">
+      <p class="step-label">意気込み</p>
+      <p class="step-title">今シーズンの意気込みを一言！</p>
+      <div class="hint-box"><p><strong>記入例：</strong>今年こそインカレで入賞する！・初大会を楽しみたい！・先輩に追いつけるよう頑張ります</p></div>
+      <textarea id="f-spirit" placeholder="一言コメント・意気込み" style="min-height:80px;"></textarea>
+    </div>
+
+    <!-- Step 11: 完了 -->
+    <div class="step" data-step="11">
+      <p class="step-label">完了</p>
+      <p class="step-title">シートが完成しました！</p>
+      <div class="complete-msg">
+        スクリーンショットを撮って提出してください。<br>
+        修正したい場合は「← 戻る」ボタンで前のステップに戻れます。
+      </div>
+      <div id="sheet-output" class="sheet-wrap"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Fixed nav -->
+<div class="nav">
+  <button class="btn btn-back" id="btn-back" style="visibility:hidden;">← 戻る</button>
+  <button class="btn btn-next" id="btn-next">次へ →</button>
+</div>
+
+<script>
+  const TOTAL = 10;
+  let current = 1;
+  const data = {};
+
+  const prog = document.getElementById('prog');
+  const progStep = document.getElementById('prog-step');
+  const progPct = document.getElementById('prog-pct');
+  const btnNext = document.getElementById('btn-next');
+  const btnBack = document.getElementById('btn-back');
+
+  function pct(n) { return Math.round(n / (TOTAL + 1) * 100); }
+
+  function showStep(n) {
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.querySelector('[data-step="' + n + '"]').classList.add('active');
+    const p = pct(n);
+    prog.style.width = p + '%';
+    if (n <= TOTAL) {
+      progStep.textContent = 'Step ' + n + ' / ' + TOTAL;
+      progPct.textContent = p + '%';
+    } else {
+      progStep.textContent = '完了';
+      progPct.textContent = '100%';
+      prog.style.width = '100%';
+    }
+    btnBack.style.visibility = n > 1 ? 'visible' : 'hidden';
+    if (n === TOTAL + 1) {
+      btnNext.style.display = 'none';
+      renderSheet();
+    } else {
+      btnNext.style.display = '';
+      btnNext.textContent = n === TOTAL ? 'シートを生成 →' : '次へ →';
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  document.querySelectorAll('.chip').forEach(function(chip) {
+    chip.addEventListener('click', function() {
+      chip.closest('.chip-group').querySelectorAll('.chip').forEach(function(c) { c.classList.remove('selected'); });
+      chip.classList.add('selected');
+      data.level = chip.dataset.val;
+    });
+  });
+
+  btnNext.addEventListener('click', function() {
+    if (current === 1) {
+      data.name = document.getElementById('f-name').value.trim();
+      data.grade = document.getElementById('f-grade').value;
+      if (!data.name) { alert('氏名を入力してください'); return; }
+      if (!data.grade) { alert('学年を選択してください'); return; }
+    }
+    if (current === 2 && !data.level) { alert('経験レベルを選んでください'); return; }
+    if (current === 3)  data.goal     = document.getElementById('f-goal').value.trim();
+    if (current === 4)  data.record   = document.getElementById('f-record').value.trim();
+    if (current === 5)  data.strength = document.getElementById('f-strength').value.trim();
+    if (current === 6)  data.issue    = document.getElementById('f-issue').value.trim();
+    if (current === 7)  data.months   = getMonths();
+    if (current === 8)  data.race     = document.getElementById('f-race').value.trim();
+    if (current === 9)  data.aspire   = document.getElementById('f-aspire').value.trim();
+    if (current === 10) data.spirit   = document.getElementById('f-spirit').value.trim();
+    current++;
+    showStep(current);
+  });
+
+  btnBack.addEventListener('click', function() {
+    if (current > 1) { current--; showStep(current); }
+  });
+
+  function getMonths() {
+    var res = {};
+    document.querySelectorAll('#month-inputs input').forEach(function(el) {
+      res[el.dataset.month] = el.value.trim() || '未定';
+    });
+    return res;
+  }
+
+  function sf(label, value) {
+    return '<div class="sf"><div class="sf-label">' + label + '</div><div class="sf-value">' + (value || '—') + '</div></div>';
+  }
+
+  function renderSheet() {
+    var today = new Date();
+    var dateStr = today.getFullYear() + '年' + (today.getMonth() + 1) + '月' + today.getDate() + '日';
+    var monthNames = {4:'4月',5:'5月',6:'6月',7:'7月',8:'8月',9:'9月',10:'10月',11:'11月'};
+    var monthHtml = '';
+    if (data.months) {
+      Object.entries(data.months).forEach(function(e) {
+        monthHtml += '<div>' + monthNames[e[0]] + '：' + e[1] + '</div>';
+      });
+    }
+    document.getElementById('sheet-output').innerHTML =
+      '<div class="sheet-header">' +
+        '<span class="sheet-header-title">山形大学スキー部　目標管理シート　2026/27シーズン</span>' +
+        '<span class="sheet-header-date">' + dateStr + '</span>' +
+      '</div>' +
+      '<div class="sheet-body">' +
+        '<div class="sheet-row2">' + sf('氏名', data.name) + sf('学年', data.grade) + '</div>' +
+        sf('経験レベル', data.level) +
+        sf('今シーズンの目標', data.goal) +
+        sf('これまでの成績・経験', data.record) +
+        '<div class="sheet-row2">' + sf('自分の強み', data.strength) + sf('課題・克服したいこと', data.issue) + '</div>' +
+        sf('オフシーズントレーニング計画', '<div class="month-list">' + monthHtml + '</div>') +
+        '<div class="sheet-row2">' + sf('出場したい大会', data.race) + sf('部活への期待・目標とする先輩', data.aspire) + '</div>' +
+        sf('今シーズンの意気込み', data.spirit) +
+      '</div>';
+  }
+</script>
+</body>
+</html>
